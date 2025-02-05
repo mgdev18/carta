@@ -1,0 +1,784 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffeded 0%, #ffd1d1 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .envelope {
+            max-width: 800px;
+            width: 90%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-origin: center;
+            animation: appear 1s ease-out;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #ff4b6b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-family: 'Arial', cursive;
+        }
+
+        .content {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        .date {
+            text-align: right;
+            color: #888;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+            font-size: 1.5em;
+            color: #ff6b6b;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .envelope {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+
+        .surprise-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8585);
+            border: none;
+            padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 30px);
+            border-radius: 25px;
+            color: white;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            cursor: pointer;
+            margin: clamp(15px, 3vw, 20px) auto;
+            display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            width: fit-content;
+        }
+
+        .photos-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+        }
+
+        .photos-heart {
+            position: relative;
+            width: min(210px, 90vw);
+            height: min(210px, 90vw);
+            animation: modalAppear 1s ease-out;
+        }
+
+        .photos-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: -40px;
+            flex-direction: column;
+
+        }
+
+        .photo {
+            width: min(95px, calc(40vw - 20px));
+            height: min(130px, calc(50vw - 20px));
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            /* margin-bottom: 100px; */
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #666;
+            margin-top: clamp(30px, 5vw, 40px);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            padding: 0 clamp(10px, 2vw, 20px);
+        }
+
+        .date {
+            text-align: right;
+            color: #888;
+            margin-top: 10px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            padding: 0 clamp(10px, 2vw, 20px);
+        }
+
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: clamp(35px, 8vw, 40px);
+            height: clamp(35px, 8vw, 40px);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: clamp(18px, 4vw, 20px);
+            color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animaciones */
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Media queries específicas */
+        @media (max-width: 480px) {
+            .photos-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .envelope {
+                margin: 10px;
+            }
+
+            .photo {
+                /* width: min(60px, 70vw);
+                height: min(120px, 90vw); */
+            }
+        }
+
+        @media (hover: hover) {
+            .surprise-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            }
+
+            .photo:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Mantener el corazón proporcionado */
+        .heart-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ff8585);
+            transform: rotate(45deg);
+            border-radius: clamp(10px, 3vw, 20px);
+        }
+
+        .heart-shape::before,
+        .heart-shape::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .heart-shape::before {
+            left: -50%;
+        }
+
+        .heart-shape::after {
+            top: -50%;
+        }
+
+        .mensaje{
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            /* text-align: center; */
+            margin-bottom: 100px;
+        }
+        .cont{
+            margin-bottom: 170px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts">
+        <span class="heart" style="top: 10%; left: 10%; animation-delay: 0s;">❤️</span>
+        <span class="heart" style="top: 20%; right: 10%; animation-delay: 1s;">❤️</span>
+        <span class="heart" style="bottom: 10%; left: 15%; animation-delay: 2s;">❤️</span>
+        <span class="heart" style="bottom: 20%; right: 15%; animation-delay: 3s;">❤️</span>
+    </div>
+
+    <div class="envelope">
+        <h1>Para el amor de mi vida</h1>
+
+        <div class="content">
+            [Escribe aquí el contenido de tu carta...]
+
+            [Por ejemplo:]
+            Querida [Su nombre],
+
+            En este día tan especial, quiero expresarte todo lo que significa para mí tenerte en mi vida. Cada momento a
+            tu lado es un regalo que atesoro profundamente...
+
+            [Continúa con tu mensaje personal...]
+        </div>
+
+        <div class="signature">
+            Con todo mi amor,<br>
+            [Tu nombre]
+        </div>
+
+        <button class="surprise-button">Tengo una sorpresa para ti ❤️</button>
+
+
+        <div class="date">14 de febrero de 2025</div>
+    </div>
+
+    <div class="photos-modal">
+        <div class="cont">
+            <button class="close-button">×</button>
+        
+            <div class="photos-heart">
+            <h1 class="mensaje">hola</h1>
+                <div class="photos-container">
+                    <img src="IMG-20250127-WA0008.jpg" alt="Tu foto" class="photo">
+                    <img src="photo_2025-02-05_01-52-53.jpg" alt="Su foto" class="photo">
+                </div>
+                <div class="heart-shape"></div>
+            </div>
+        </div>
+    
+    </div>
+
+
+    <script>
+        const surpriseButton = document.querySelector('.surprise-button');
+        const modal = document.querySelector('.photos-modal');
+        const closeButton = document.querySelector('.close-button');
+
+        surpriseButton.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+        });
+
+        closeButton.addEventListener('click', () => {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeButton.click();
+            }
+        });
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffeded 0%, #ffd1d1 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .envelope {
+            max-width: 800px;
+            width: 90%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-origin: center;
+            animation: appear 1s ease-out;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #ff4b6b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-family: 'Arial', cursive;
+        }
+
+        .content {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        .date {
+            text-align: right;
+            color: #888;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+            font-size: 1.5em;
+            color: #ff6b6b;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .envelope {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        .surprise-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8585);
+            border: none;
+            padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 30px);
+            border-radius: 25px;
+            color: white;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            cursor: pointer;
+            margin: clamp(15px, 3vw, 20px) auto;
+            display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            width: fit-content;
+        }
+
+        .photos-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+        }
+
+        .photos-heart {
+            position: relative;
+            width: min(210px, 90vw);
+            height: min(210px, 90vw);
+            animation: modalAppear 1s ease-out;
+        }
+
+        /* Animación para que el contenido del modal aparezca deslizando */
+        @keyframes modalContentAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photos-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: -40px;
+            flex-direction: column;
+            /* Se agrega la animación al contenido del modal */
+            animation: modalContentAnimation 1s ease-out forwards;
+        }
+
+        .photo {
+            width: min(95px, calc(40vw - 20px));
+            height: min(130px, calc(50vw - 20px));
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #666;
+            margin-top: clamp(30px, 5vw, 40px);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            padding: 0 clamp(10px, 2vw, 20px);
+        }
+
+        .date {
+            text-align: right;
+            color: #888;
+            margin-top: 10px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            padding: 0 clamp(10px, 2vw, 20px);
+        }
+
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: clamp(35px, 8vw, 40px);
+            height: clamp(35px, 8vw, 40px);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: clamp(18px, 4vw, 20px);
+            color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animación para el contenedor general del modal */
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photos-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .envelope {
+                margin: 10px;
+            }
+        }
+
+        @media (hover: hover) {
+            .surprise-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            }
+
+            .photo:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Mantener el corazón proporcionado */
+        .heart-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ff8585);
+            transform: rotate(45deg);
+            border-radius: clamp(10px, 3vw, 20px);
+            /* Animación de latido */
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .heart-shape::before,
+        .heart-shape::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .heart-shape::before {
+            left: -50%;
+        }
+
+        .heart-shape::after {
+            top: -50%;
+        }
+
+        .mensaje {
+            margin-bottom: 100px;
+        }
+
+        .cont {
+            margin-bottom: 170px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(45deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts">
+        <span class="heart" style="top: 10%; left: 10%; animation-delay: 0s;">❤️</span>
+        <span class="heart" style="top: 20%; right: 10%; animation-delay: 1s;">❤️</span>
+        <span class="heart" style="bottom: 10%; left: 15%; animation-delay: 2s;">❤️</span>
+        <span class="heart" style="bottom: 20%; right: 15%; animation-delay: 3s;">❤️</span>
+    </div>
+
+    <div class="envelope">
+        <h1>Para el amor de mi vida</h1>
+
+        <div class="content">
+            [Escribe aquí el contenido de tu carta...]
+
+            [Por ejemplo:]
+            Querida [Su nombre],
+
+            En este día tan especial, quiero expresarte todo lo que significa para mí tenerte en mi vida. Cada momento a
+            tu lado es un regalo que atesoro profundamente...
+
+            [Continúa con tu mensaje personal...]
+        </div>
+
+        <div class="signature">
+            Con todo mi amor,<br>
+            [Tu nombre]
+        </div>
+
+        <button class="surprise-button">Tengo una sorpresa para ti ❤️</button>
+
+        <div class="date">14 de febrero de 2025</div>
+    </div>
+
+    <div class="photos-modal">
+        <div class="cont">
+            <button class="close-button">×</button>
+
+            <div class="photos-heart">
+                <h1 class="mensaje">hola</h1>
+                <div class="photos-container">
+                    <img src="IMG-20250127-WA0008.jpg" alt="Tu foto" class="photo">
+                    <img src="photo_2025-02-05_01-52-53.jpg" alt="Su foto" class="photo">
+                </div>
+                <div class="heart-shape"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const surpriseButton = document.querySelector('.surprise-button');
+        const modal = document.querySelector('.photos-modal');
+        const closeButton = document.querySelector('.close-button');
+
+        surpriseButton.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+        });
+
+        closeButton.addEventListener('click', () => {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeButton.click();
+            }
+        });
+    </script>
+</body>
+
+</html>
